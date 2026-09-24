@@ -1,10 +1,11 @@
 -- Exam Website Database Schema
+
 CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE students (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,7 +13,7 @@ CREATE TABLE students (
     email VARCHAR(150) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE exams (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,7 +24,7 @@ CREATE TABLE exams (
     pass_percentage INT NOT NULL DEFAULT 40,
     is_active TINYINT(1) NOT NULL DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE questions (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,7 +38,7 @@ CREATE TABLE questions (
     explanation TEXT,
     marks INT NOT NULL DEFAULT 1,
     FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE attempts (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +54,7 @@ CREATE TABLE attempts (
     submitted_at TIMESTAMP NULL,
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
     FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE attempt_answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -63,7 +64,7 @@ CREATE TABLE attempt_answers (
     is_correct TINYINT(1) NOT NULL DEFAULT 0,
     FOREIGN KEY (attempt_id) REFERENCES attempts(id) ON DELETE CASCADE,
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Default admin login -> username: admin / password: admin123  (CHANGE AFTER FIRST LOGIN)
 INSERT INTO admins (username, password) VALUES
