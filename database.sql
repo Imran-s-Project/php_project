@@ -1,5 +1,3 @@
--- Exam Website Database Schema
-
 CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -66,11 +64,9 @@ CREATE TABLE attempt_answers (
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Default admin login -> username: admin / password: admin123  (CHANGE AFTER FIRST LOGIN)
 INSERT INTO admins (username, password) VALUES
 ('admin', '$2b$12$znpcw9/KCJSKjSUsbvZKZepTZZ9ibeCbVsa0BssNRkhiW4mNuZjKK');
 
--- Sample exam + questions so the site works immediately after import
 INSERT INTO exams (title, description, duration_minutes, negative_marking, pass_percentage, is_active) VALUES
 ('সাধারণ জ্ঞান - নমুনা পরীক্ষা', 'একটি নমুনা exam যা দিয়ে সিস্টেমটি টেস্ট করতে পারবেন।', 10, 0.25, 40, 1);
 
